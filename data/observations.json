@@ -1,0 +1,774 @@
+{
+  "synthetic": true,
+  "provenance": "人工构造用于方法验证；不是现场采集。布尔值代表记录测试结果，null是缺失。",
+  "cases": [
+    {
+      "id": "W01",
+      "title": "位置调查样本01",
+      "incident": "室外网页打不开，回楼内恢复，请调查。",
+      "snapshots": {
+        "indoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:00:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-IN",
+          "rssi_dbm": -48,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        },
+        "outdoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:01:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-OUT",
+          "rssi_dbm": -65,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              false,
+              false,
+              false
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "W02",
+      "title": "位置调查样本02",
+      "incident": "手机已连接校园WiFi但应用无响应。",
+      "snapshots": {
+        "indoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:00:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-IN",
+          "rssi_dbm": -48,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        },
+        "outdoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:01:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-OUT",
+          "rssi_dbm": -65,
+          "ip": "169.254.12.3",
+          "prefix": 24,
+          "gateway": null,
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              false,
+              false,
+              null
+            ],
+            "https": [
+              false,
+              false,
+              null
+            ],
+            "dns": [
+              false,
+              false,
+              null
+            ],
+            "icmp": [
+              false,
+              false,
+              null
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "W03",
+      "title": "位置调查样本03",
+      "incident": "连接后浏览器出现登录提示，其他应用无响应。",
+      "snapshots": {
+        "indoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:00:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-IN",
+          "rssi_dbm": -48,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        },
+        "outdoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:01:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-OUT",
+          "rssi_dbm": -65,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "required",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              false,
+              false,
+              false
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "W04",
+      "title": "位置调查样本04",
+      "incident": "门外网络不稳定，连接图标仍在。",
+      "snapshots": {
+        "indoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:00:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-IN",
+          "rssi_dbm": -48,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        },
+        "outdoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:01:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-OUT",
+          "rssi_dbm": -86,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              false,
+              true,
+              false
+            ],
+            "https": [
+              false,
+              false,
+              true
+            ],
+            "dns": [
+              null,
+              null
+            ],
+            "icmp": [
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "W05",
+      "title": "位置调查样本05",
+      "incident": "采集程序只返回了部分记录，请判断。",
+      "snapshots": {
+        "indoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:00:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-IN",
+          "rssi_dbm": -48,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        },
+        "outdoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:01:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-OUT",
+          "rssi_dbm": null,
+          "ip": null,
+          "prefix": null,
+          "gateway": null,
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": null,
+          "checks": {}
+        }
+      }
+    },
+    {
+      "id": "W06",
+      "title": "位置调查样本06",
+      "incident": "监控记录与用户现象不一致，请检查。",
+      "snapshots": {
+        "indoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:00:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-IN",
+          "rssi_dbm": -48,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        },
+        "outdoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:01:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-OUT",
+          "rssi_dbm": -65,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "required",
+          "checks": {
+            "gateway": [
+              false,
+              false,
+              false
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "W07",
+      "title": "位置调查样本07",
+      "incident": "从楼内移到门口后接入点发生变化，请巡检。",
+      "snapshots": {
+        "indoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:00:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-IN",
+          "rssi_dbm": -48,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        },
+        "outdoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:01:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-OUT",
+          "rssi_dbm": -65,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "W08",
+      "title": "位置调查样本08",
+      "incident": "诊断软件提示ping失败，但浏览器可以访问测试站。",
+      "snapshots": {
+        "indoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:00:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-IN",
+          "rssi_dbm": -48,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        },
+        "outdoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:01:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-OUT",
+          "rssi_dbm": -65,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              false,
+              false,
+              false
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "W09",
+      "title": "位置调查样本09",
+      "incident": "故障切换后网络多项异常，请调查。",
+      "snapshots": {
+        "indoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:00:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-IN",
+          "rssi_dbm": -48,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        },
+        "outdoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:01:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-OUT",
+          "rssi_dbm": -65,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "required",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              false,
+              false,
+              false
+            ],
+            "dns": [
+              false,
+              false,
+              false
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "W10",
+      "title": "位置调查样本10",
+      "incident": "两次不同位置的记录表现不同，请判断是否位置导致。",
+      "snapshots": {
+        "indoor": {
+          "device_id": "phone-A",
+          "time": "2026-11-04T09:00:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-IN",
+          "rssi_dbm": -48,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              true,
+              true,
+              true
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        },
+        "outdoor": {
+          "device_id": "phone-B",
+          "time": "2026-11-04T12:00:00+08:00",
+          "ssid": "Campus",
+          "bssid": "AP-OUT",
+          "rssi_dbm": -65,
+          "ip": "10.1.2.20",
+          "prefix": 24,
+          "gateway": "10.1.2.1",
+          "dns": [
+            "10.1.0.53"
+          ],
+          "auth": "complete",
+          "checks": {
+            "gateway": [
+              true,
+              true,
+              true
+            ],
+            "https": [
+              false,
+              false,
+              false
+            ],
+            "dns": [
+              true,
+              true,
+              true
+            ],
+            "icmp": [
+              true,
+              true,
+              true
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

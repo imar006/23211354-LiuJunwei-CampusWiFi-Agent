@@ -1,0 +1,18 @@
+{
+  "browser": "Microsoft Edge via Playwright",
+  "desktop": "1440x1000",
+  "mobile": "390x844",
+  "checks": [
+    "10 tiles",
+    "offline provenance",
+    "sample replay",
+    "trace export provenance",
+    "10 saved samples",
+    "keyboard switch",
+    "tile select",
+    "observation panel",
+    "no horizontal overflow",
+    "no page errors"
+  ],
+  "status": "passed"
+}

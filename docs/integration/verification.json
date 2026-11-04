@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-04",
+  "server": {
+    "status": "ok",
+    "version": "1.1.0",
+    "service": "wifi-investigation",
+    "model_configured": false
+  },
+  "live_browser": true,
+  "offline_fallback": false,
+  "checks": [
+    "real POST from UI",
+    "new trace_id and UTC time",
+    "trace roundtrip",
+    "browser JSON export",
+    "10 actual tool investigations",
+    "null regression W02/W04",
+    "record navigation",
+    "HTTP 404 and 422",
+    "unconfigured model explicit failure",
+    "no JS page errors"
+  ],
+  "cases": [
+    {
+      "case_id": "W01",
+      "status": "completed",
+      "label": "dns",
+      "trace_id": "897e65ee2d0849478593a926c0ba84fb"
+    },
+    {
+      "case_id": "W02",
+      "status": "completed",
+      "label": "ip_config",
+      "trace_id": "7c423c1b8455409e8c4eaeef462466c4"
+    },
+    {
+      "case_id": "W03",
+      "status": "completed",
+      "label": "authentication",
+      "trace_id": "7684acccfdc1416d9416f3a376925483"
+    },
+    {
+      "case_id": "W04",
+      "status": "completed",
+      "label": "wireless_uncertain",
+      "trace_id": "4032b0832eae4f81ad8b0afcc8a2c4de"
+    },
+    {
+      "case_id": "W05",
+      "status": "completed",
+      "label": "insufficient",
+      "trace_id": "96c778882f9641e291f945bc21b9ca0f"
+    },
+    {
+      "case_id": "W06",
+      "status": "completed",
+      "label": "conflicting",
+      "trace_id": "1277b56f56a44534979ace2e9f33f648"
+    },
+    {
+      "case_id": "W07",
+      "status": "completed",
+      "label": "normal",
+      "trace_id": "ca3daf5760db4efc9e14cacb5a6cd2de"
+    },
+    {
+      "case_id": "W08",
+      "status": "completed",
+      "label": "normal",
+      "trace_id": "3163589cb0704872b5c59cfbe97d3590"
+    },
+    {
+      "case_id": "W09",
+      "status": "completed",
+      "label": "mixed",
+      "trace_id": "46f299a990024b709b263c3bbb478e5c"
+    },
+    {
+      "case_id": "W10",
+      "status": "completed",
+      "label": "insufficient",
+      "trace_id": "e9529c3987804fcd9e8e303ae22d76e1"
+    }
+  ],
+  "missing_model_status": "failed",
+  "status": "passed"
+}

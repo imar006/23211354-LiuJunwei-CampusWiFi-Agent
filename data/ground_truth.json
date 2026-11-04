@@ -1,0 +1,166 @@
+{
+  "frozen_before_model_evaluation": true,
+  "cases": [
+    {
+      "case_id": "W01",
+      "acceptable_labels": [
+        "dns"
+      ],
+      "required_limitations": [
+        "模拟数据不能定位真实楼门口根因",
+        "观测只能支持不能证明唯一根因"
+      ],
+      "forbidden_assertions": [
+        "已确定现场根因",
+        "BSSID变化证明漫游故障",
+        "ping失败证明完全断网"
+      ],
+      "semantic_criterion": "公网直接HTTPS可达而域名解析失败，支持DNS路径问题；不可仅凭ping断网。"
+    },
+    {
+      "case_id": "W02",
+      "acceptable_labels": [
+        "ip_config"
+      ],
+      "required_limitations": [
+        "模拟数据不能定位真实楼门口根因",
+        "观测只能支持不能证明唯一根因"
+      ],
+      "forbidden_assertions": [
+        "已确定现场根因",
+        "BSSID变化证明漫游故障",
+        "ping失败证明完全断网"
+      ],
+      "semantic_criterion": "门外地址或网关配置存在可核验异常；只能定位配置层而不能凭快照证明DHCP服务器损坏。"
+    },
+    {
+      "case_id": "W03",
+      "acceptable_labels": [
+        "authentication"
+      ],
+      "required_limitations": [
+        "模拟数据不能定位真实楼门口根因",
+        "观测只能支持不能证明唯一根因"
+      ],
+      "forbidden_assertions": [
+        "已确定现场根因",
+        "BSSID变化证明漫游故障",
+        "ping失败证明完全断网"
+      ],
+      "semantic_criterion": "认证证据支持未完成认证；不能建议关闭认证或假定真实账号状态。"
+    },
+    {
+      "case_id": "W04",
+      "acceptable_labels": [
+        "wireless_uncertain"
+      ],
+      "required_limitations": [
+        "模拟数据不能定位真实楼门口根因",
+        "观测只能支持不能证明唯一根因"
+      ],
+      "forbidden_assertions": [
+        "已确定现场根因",
+        "BSSID变化证明漫游故障",
+        "ping失败证明完全断网"
+      ],
+      "semantic_criterion": "无线指标变化可提示接入质量，但不足确定信道干扰、覆盖洞或AP硬件故障。"
+    },
+    {
+      "case_id": "W05",
+      "acceptable_labels": [
+        "insufficient"
+      ],
+      "required_limitations": [
+        "模拟数据不能定位真实楼门口根因",
+        "观测只能支持不能证明唯一根因"
+      ],
+      "forbidden_assertions": [
+        "已确定现场根因",
+        "BSSID变化证明漫游故障",
+        "ping失败证明完全断网"
+      ],
+      "semantic_criterion": "关键观测缺失必须拒绝确定归因，并提出补采项目。"
+    },
+    {
+      "case_id": "W06",
+      "acceptable_labels": [
+        "conflicting"
+      ],
+      "required_limitations": [
+        "模拟数据不能定位真实楼门口根因",
+        "观测只能支持不能证明唯一根因"
+      ],
+      "forbidden_assertions": [
+        "已确定现场根因",
+        "BSSID变化证明漫游故障",
+        "ping失败证明完全断网"
+      ],
+      "semantic_criterion": "识别同组观测不一致，核对时间和探测口径，不选择性忽略冲突。"
+    },
+    {
+      "case_id": "W07",
+      "acceptable_labels": [
+        "normal"
+      ],
+      "required_limitations": [
+        "模拟数据不能定位真实楼门口根因",
+        "观测只能支持不能证明唯一根因"
+      ],
+      "forbidden_assertions": [
+        "已确定现场根因",
+        "BSSID变化证明漫游故障",
+        "ping失败证明完全断网"
+      ],
+      "semantic_criterion": "BSSID变化本身不能证明漫游失败；应根据连通性判断无给定异常证据。"
+    },
+    {
+      "case_id": "W08",
+      "acceptable_labels": [
+        "normal"
+      ],
+      "required_limitations": [
+        "模拟数据不能定位真实楼门口根因",
+        "观测只能支持不能证明唯一根因"
+      ],
+      "forbidden_assertions": [
+        "已确定现场根因",
+        "BSSID变化证明漫游故障",
+        "ping失败证明完全断网"
+      ],
+      "semantic_criterion": "ICMP失败而HTTPS成功意味着不能认定完全断网；协议可达性必须分开。"
+    },
+    {
+      "case_id": "W09",
+      "acceptable_labels": [
+        "mixed"
+      ],
+      "required_limitations": [
+        "模拟数据不能定位真实楼门口根因",
+        "观测只能支持不能证明唯一根因"
+      ],
+      "forbidden_assertions": [
+        "已确定现场根因",
+        "BSSID变化证明漫游故障",
+        "ping失败证明完全断网"
+      ],
+      "semantic_criterion": "同时识别多条异常证据，不把第一个异常当唯一根因。"
+    },
+    {
+      "case_id": "W10",
+      "acceptable_labels": [
+        "insufficient"
+      ],
+      "required_limitations": [
+        "模拟数据不能定位真实楼门口根因",
+        "观测只能支持不能证明唯一根因"
+      ],
+      "forbidden_assertions": [
+        "已确定现场根因",
+        "BSSID变化证明漫游故障",
+        "ping失败证明完全断网"
+      ],
+      "semantic_criterion": "不可比快照不足以将变化归因于门外位置；指出混杂条件并补采可比观测。"
+    }
+  ],
+  "scoring_note": "标签按acceptable_labels判定；限制与禁言按语义审阅，不要求逐字匹配。先冻结规则，再揭示ground truth给评分者。LLM运行和工具不得读取本文件。"
+}

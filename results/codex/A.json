@@ -1,0 +1,147 @@
+{
+  "group": "A",
+  "backend": "codex-collaboration",
+  "model": "inherited default; exact id unavailable",
+  "cases": [
+    {
+      "case_id": "W01",
+      "conclusion": {
+        "label": "dns",
+        "assessment": "优先怀疑室外解析路径异常。备选解释包括测试域名或解析测试本身有问题、AP侧访问策略差异；不能据此锁定DNS服务器故障，也不能证明位置本身造成故障。",
+        "evidence": [
+          {"claim": "同一手机室内各项成功，室外DNS三次失败，而网关、HTTPS和ICMP均三次成功，异常集中在解析检查。", "source_ids": ["observation"]},
+          {"claim": "两处IP、网关及DNS配置相同，认证均完成，BSSID发生变化。", "source_ids": ["observation"]}
+        ],
+        "counterevidence": ["室外HTTPS成功，不能把现象描述为所有网页或全部互联网流量不可用；缓存、目标不同等可能解释HTTPS与DNS的差异。", "RSSI变弱但其他探测稳定，不支持仅凭信号值认定无线失效。"],
+        "limitations": ["未提供DNS查询目标、响应错误、HTTPS是否依赖实时解析及探测时间关系。", "这些是人工构造记录，未开展现场验证。"],
+        "recommendations": ["在同一手机同一时间窗口记录失败域名、DNS错误和HTTPS目标。", "比较两接入点到配置解析器的访问结果，并检查AP侧DNS策略。"]
+      }
+    },
+    {
+      "case_id": "W02",
+      "conclusion": {
+        "label": "ip_config",
+        "assessment": "最直接异常是室外地址配置不可用；可疑机制包括DHCP未成功、租约或VLAN衔接异常，也可能是手动配置或采集错误。尚不能确定具体机制。",
+        "evidence": [
+          {"claim": "室外地址为169.254.12.3且网关缺失，区别于室内10.1.2.20及完整网关配置。", "source_ids": ["observation"]},
+          {"claim": "室外已记录的网关、HTTPS、DNS和ICMP测试均失败，认证记录为complete。", "source_ids": ["observation"]}
+        ],
+        "counterevidence": ["已连接SSID且认证完成不能证明IP配置有效。", "没有DHCP交互记录，不能把地址异常等同于已证明DHCP服务器故障。"],
+        "limitations": ["各项第三次检查为null，代表缺测而非失败。", "缺少地址分配方式、租约、路由与AP侧配置。"],
+        "recommendations": ["核对地址获取方式及DHCP租约，重新获取地址后观察是否恢复。", "若仍异常，检查室外AP的VLAN和DHCP转发路径。"]
+      }
+    },
+    {
+      "case_id": "W03",
+      "conclusion": {
+        "label": "authentication",
+        "assessment": "优先考虑门户认证未完成或认证状态未随接入点切换保持。其他可能是HTTPS目标或访问策略异常，现有证据对认证解释更有支持。",
+        "evidence": [
+          {"claim": "用户看到登录提示，室外auth为required，而室内为complete。", "source_ids": ["observation"]},
+          {"claim": "室外网关、DNS及ICMP都成功，仅HTTPS持续失败，且IP与网关配置保留。", "source_ids": ["observation"]}
+        ],
+        "counterevidence": ["ICMP与DNS可用表明不是完全断网，但并不证明应用访问已获授权。", "HTTPS失败也可能由目标或TLS问题造成，不能仅由探测结果确认门户拦截。"],
+        "limitations": ["没有门户响应、认证日志或登录后复测结果。"],
+        "recommendations": ["通过校园官方门户完成认证，并复测同一HTTPS目标。", "若认证后仍失败，核对认证会话绑定及HTTPS错误内容。"]
+      }
+    },
+    {
+      "case_id": "W04",
+      "conclusion": {
+        "label": "wireless_uncertain",
+        "assessment": "室外链路不稳定且信号很弱，无线覆盖或干扰是合理优先假设；AP上联波动或其他路径丢包亦可产生类似现象，不能确认唯一因果。",
+        "evidence": [
+          {"claim": "RSSI由室内-48变为室外-86 dBm，室外网关与ICMP成功失败交替，HTTPS也有成功与失败。", "source_ids": ["observation"]},
+          {"claim": "IP、网关配置完整且认证完成，没有直接的地址或认证异常记录。", "source_ids": ["observation"]}
+        ],
+        "counterevidence": ["弱信号只是相关证据，没有重传率、噪声或无线丢包记录证明根因。", "仍有探测成功，不能判定持续断连。"],
+        "limitations": ["DNS检查均为null，无法评价解析服务。", "短时少量探测无法区分无线、AP上联及瞬时拥塞。"],
+        "recommendations": ["同设备沿距离变化连续记录信号与网关稳定性。", "同步检查无线重传和AP上联状态，确认异常发生在哪一段。"]
+      }
+    },
+    {
+      "case_id": "W05",
+      "conclusion": {
+        "label": "insufficient",
+        "assessment": "室外关键观测缺失，无法区分无线、地址、认证、DNS或应用异常，也无法判断室外是否真的不可用。首先考虑采集不完整，而不是把空值解释成故障。",
+        "evidence": [
+          {"claim": "室外RSSI、IP、前缀、网关及认证为null，checks为空。", "source_ids": ["observation"]},
+          {"claim": "室内检查成功，室外仅保留SSID、BSSID及DNS配置等信息。", "source_ids": ["observation"]}
+        ],
+        "counterevidence": ["网关和IP缺失不能与已观测到无网关、地址获取失败等同。", "存在DNS配置不代表DNS请求实际成功或失败。"],
+        "limitations": ["没有室外连通性测试结果，不能作故障类型判断。"],
+        "recommendations": ["先修复或补全采集，记录同一设备的地址、路由、认证及各项探测结果。", "补采失败时同时记录采集错误，区分测试未执行与网络失败。"]
+      }
+    },
+    {
+      "case_id": "W06",
+      "conclusion": {
+        "label": "conflicting",
+        "assessment": "认证字段与实际访问结果不一致，应先核对记录语义和采集一致性。可能是认证字段过期或仅针对部分资源，也可能网关探测被过滤；这些观测并非逻辑上绝不可能同时发生。",
+        "evidence": [
+          {"claim": "室外auth为required，但HTTPS、DNS和ICMP检查均成功。", "source_ids": ["observation"]},
+          {"claim": "网关检查均失败，然而其他访问检查成功，形成需要解释的监控差异。", "source_ids": ["observation"]}
+        ],
+        "counterevidence": ["网关不响应某种探测并不表示不能转发数据。", "认证required可能允许白名单目标访问，因此不能直接认定记录造假或认证一定无效。"],
+        "limitations": ["缺少探测协议、目的地址、门户策略和逐项时间戳。", "事件描述没有给出具体用户失败操作。"],
+        "recommendations": ["核对认证字段来源、更新时间及HTTPS目标是否在白名单。", "同步复现用户操作并保留错误，检查网关探测的协议及过滤策略。"]
+      }
+    },
+    {
+      "case_id": "W07",
+      "conclusion": {
+        "label": "normal",
+        "assessment": "现有检查支持本次切换后网络正常。接入点变化和信号降低本身不构成故障；未覆盖的应用问题或短暂漫游中断仍可能存在。",
+        "evidence": [
+          {"claim": "同一设备由AP-IN切换至AP-OUT，两处网关、HTTPS、DNS及ICMP全部成功。", "source_ids": ["observation"]},
+          {"claim": "地址配置保持一致，认证均为complete。", "source_ids": ["observation"]}
+        ],
+        "counterevidence": ["RSSI由-48降至-65 dBm，但未伴随本次探测失败。", "快照不能排除切换过程中的短暂中断。"],
+        "limitations": ["未提供漫游耗时、吞吐量或持续应用会话记录。"],
+        "recommendations": ["保留本次正常巡检结果；如需评估漫游体验，连续观察切换中的实际应用会话。"]
+      }
+    },
+    {
+      "case_id": "W08",
+      "conclusion": {
+        "label": "normal",
+        "assessment": "就浏览器和已有应用连通性检查看网络可用，ICMP检查存在单项异常。可能是ICMP过滤、限速或目标不响应，也可能是独立路径问题，不能把ping失败推成整体断网。",
+        "evidence": [
+          {"claim": "室外HTTPS、DNS和网关检查全成功，与浏览器可访问测试站的描述相符。", "source_ids": ["observation"]},
+          {"claim": "室外ICMP三次失败，但认证完成、地址配置完整。", "source_ids": ["observation"]}
+        ],
+        "counterevidence": ["ICMP失败是真实记录的异常，所以normal仅限于已验证的应用可用性。", "没有策略证据，不能确定一定是防火墙禁ping。"],
+        "limitations": ["ICMP目标和HTTPS目标未给出，不能确认两者测试相同路径。"],
+        "recommendations": ["以实际业务HTTPS访问判断该业务可用性。", "如ICMP监控有需求，核对目标、过滤及限速配置后再解释告警。"]
+      }
+    },
+    {
+      "case_id": "W09",
+      "conclusion": {
+        "label": "mixed",
+        "assessment": "同时存在认证待完成与DNS检查失败两类异常。可能是认证策略同时限制HTTPS和DNS，也可能认证与解析分别异常；目前无法判定是一个共同原因还是两个故障。",
+        "evidence": [
+          {"claim": "室外auth由complete变成required，HTTPS全部失败。", "source_ids": ["observation"]},
+          {"claim": "室外DNS也全部失败，但网关与ICMP全部成功，IP配置没有改变。", "source_ids": ["observation"]}
+        ],
+        "counterevidence": ["基础连通性成功，不支持整体无线或IP链路完全失效。", "DNS失败可能是认证策略的结果，不足以证明有独立DNS服务器故障。"],
+        "limitations": ["没有认证前后对照、DNS错误细节或门户访问策略。"],
+        "recommendations": ["完成官方认证后同步复测DNS和HTTPS。", "若解析仍失败，再检查配置解析器及AP侧访问路径；保留每一步结果以区分共同原因与并发问题。"]
+      }
+    },
+    {
+      "case_id": "W10",
+      "conclusion": {
+        "label": "insufficient",
+        "assessment": "可以确认室外这条记录的HTTPS检查失败，但不足以断言位置导致。设备和时间同时改变；设备应用或TLS配置、目标服务在另一时段异常、AP策略差异均是可行假设。",
+        "evidence": [
+          {"claim": "室内为09:00的phone-A，室外为12:00的phone-B，位置比较包含设备和时间混杂。", "source_ids": ["observation"]},
+          {"claim": "室外HTTPS全失败，而网关、DNS、ICMP全成功，认证完成且配置完整，异常局限于现有HTTPS检查。", "source_ids": ["observation"]}
+        ],
+        "counterevidence": ["室外BSSID和RSSI不同与位置变化一致，但不能排除设备和时段造成的差异。", "基础检查正常反对简单归因为无线断网，也不能排除HTTPS访问策略差异。", "不同时间记录相同IP本身不能证明地址冲突。"],
+        "limitations": ["缺少同设备、接近同时间的两位置对照与HTTPS错误信息。", "每个位置只有一个快照，无法估计重复性。"],
+        "recommendations": ["用同一设备在短时间内往返两处测试同一HTTPS目标，保留逐项时间及错误。", "再用另一设备重复交叉比较，核对目标服务状态和设备TLS、代理配置。"]
+      }
+    }
+  ]
+}

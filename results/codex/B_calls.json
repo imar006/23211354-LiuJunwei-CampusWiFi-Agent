@@ -1,0 +1,622 @@
+{
+  "group": "B",
+  "calls": [
+    {
+      "case_id": "W01",
+      "id": "B-W01-1",
+      "name": "analyze_connectivity",
+      "arguments": {
+        "case_id": "W01"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "stats": {
+            "gateway": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "https": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "dns": {
+              "successes": 0,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 0.0,
+              "valid_ratio": 1.0
+            },
+            "icmp": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            }
+          },
+          "auth": "complete",
+          "conflicts": [],
+          "limitation": "Recorded checks only, not live probes; single target and ICMP failure cannot establish total outage."
+        }
+      }
+    },
+    {
+      "case_id": "W02",
+      "id": "B-W02-1",
+      "name": "check_ip_config",
+      "arguments": {
+        "case_id": "W02"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "format_valid": true,
+          "usable": false,
+          "same_subnet": null,
+          "issues": [
+            "Address unsuitable for ordinary campus Internet access",
+            "Missing gateway"
+          ],
+          "address_class": "link_local"
+        }
+      }
+    },
+    {
+      "case_id": "W02",
+      "id": "B-W02-2",
+      "name": "analyze_connectivity",
+      "arguments": {
+        "case_id": "W02"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "stats": {
+            "gateway": {
+              "successes": 0,
+              "valid": 2,
+              "total": 3,
+              "success_ratio": 0.0,
+              "valid_ratio": 0.6666666666666666
+            },
+            "https": {
+              "successes": 0,
+              "valid": 2,
+              "total": 3,
+              "success_ratio": 0.0,
+              "valid_ratio": 0.6666666666666666
+            },
+            "dns": {
+              "successes": 0,
+              "valid": 2,
+              "total": 3,
+              "success_ratio": 0.0,
+              "valid_ratio": 0.6666666666666666
+            },
+            "icmp": {
+              "successes": 0,
+              "valid": 2,
+              "total": 3,
+              "success_ratio": 0.0,
+              "valid_ratio": 0.6666666666666666
+            }
+          },
+          "auth": "complete",
+          "conflicts": [
+            "gateway: invalid/missing samples are not failures",
+            "https: invalid/missing samples are not failures",
+            "dns: invalid/missing samples are not failures",
+            "icmp: invalid/missing samples are not failures"
+          ],
+          "limitation": "Recorded checks only, not live probes; single target and ICMP failure cannot establish total outage."
+        }
+      }
+    },
+    {
+      "case_id": "W03",
+      "id": "B-W03-1",
+      "name": "analyze_connectivity",
+      "arguments": {
+        "case_id": "W03"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "stats": {
+            "gateway": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "https": {
+              "successes": 0,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 0.0,
+              "valid_ratio": 1.0
+            },
+            "dns": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "icmp": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            }
+          },
+          "auth": "required",
+          "conflicts": [],
+          "limitation": "Recorded checks only, not live probes; single target and ICMP failure cannot establish total outage."
+        }
+      }
+    },
+    {
+      "case_id": "W04",
+      "id": "B-W04-1",
+      "name": "analyze_connectivity",
+      "arguments": {
+        "case_id": "W04"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "stats": {
+            "gateway": {
+              "successes": 1,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 0.3333333333333333,
+              "valid_ratio": 1.0
+            },
+            "https": {
+              "successes": 1,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 0.3333333333333333,
+              "valid_ratio": 1.0
+            },
+            "dns": {
+              "successes": 0,
+              "valid": 0,
+              "total": 2,
+              "success_ratio": null,
+              "valid_ratio": 0.0
+            },
+            "icmp": {
+              "successes": 1,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 0.3333333333333333,
+              "valid_ratio": 1.0
+            }
+          },
+          "auth": "complete",
+          "conflicts": [
+            "dns: invalid/missing samples are not failures"
+          ],
+          "limitation": "Recorded checks only, not live probes; single target and ICMP failure cannot establish total outage."
+        }
+      }
+    },
+    {
+      "case_id": "W04",
+      "id": "B-W04-2",
+      "name": "compare_snapshots",
+      "arguments": {
+        "case_id": "W04"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "same_device": true,
+          "seconds_apart": 60.0,
+          "comparable": true,
+          "changes": {
+            "bssid": {
+              "indoor": "AP-IN",
+              "outdoor": "AP-OUT"
+            },
+            "rssi_dbm": {
+              "indoor": -48,
+              "outdoor": -86
+            }
+          },
+          "limitations": [
+            "BSSID change alone does not prove roaming failure; signal alone cannot prove interference."
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "W05",
+      "id": "B-W05-1",
+      "name": "check_ip_config",
+      "arguments": {
+        "case_id": "W05"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "format_valid": null,
+          "usable": null,
+          "same_subnet": null,
+          "issues": [
+            "Missing address or prefix"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "W05",
+      "id": "B-W05-2",
+      "name": "analyze_connectivity",
+      "arguments": {
+        "case_id": "W05"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "stats": {
+            "gateway": {
+              "successes": 0,
+              "valid": 0,
+              "total": 0,
+              "success_ratio": null,
+              "valid_ratio": null
+            },
+            "https": {
+              "successes": 0,
+              "valid": 0,
+              "total": 0,
+              "success_ratio": null,
+              "valid_ratio": null
+            },
+            "dns": {
+              "successes": 0,
+              "valid": 0,
+              "total": 0,
+              "success_ratio": null,
+              "valid_ratio": null
+            },
+            "icmp": {
+              "successes": 0,
+              "valid": 0,
+              "total": 0,
+              "success_ratio": null,
+              "valid_ratio": null
+            }
+          },
+          "auth": null,
+          "conflicts": [],
+          "limitation": "Recorded checks only, not live probes; single target and ICMP failure cannot establish total outage."
+        }
+      }
+    },
+    {
+      "case_id": "W06",
+      "id": "B-W06-1",
+      "name": "analyze_connectivity",
+      "arguments": {
+        "case_id": "W06"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "stats": {
+            "gateway": {
+              "successes": 0,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 0.0,
+              "valid_ratio": 1.0
+            },
+            "https": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "dns": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "icmp": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            }
+          },
+          "auth": "required",
+          "conflicts": [
+            "HTTPS works while gateway checks fail; ICMP policy or target limitation possible",
+            "Authentication required but HTTPS succeeds; walled garden or stale state possible"
+          ],
+          "limitation": "Recorded checks only, not live probes; single target and ICMP failure cannot establish total outage."
+        }
+      }
+    },
+    {
+      "case_id": "W07",
+      "id": "B-W07-1",
+      "name": "compare_snapshots",
+      "arguments": {
+        "case_id": "W07"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "same_device": true,
+          "seconds_apart": 60.0,
+          "comparable": true,
+          "changes": {
+            "bssid": {
+              "indoor": "AP-IN",
+              "outdoor": "AP-OUT"
+            },
+            "rssi_dbm": {
+              "indoor": -48,
+              "outdoor": -65
+            }
+          },
+          "limitations": [
+            "BSSID change alone does not prove roaming failure; signal alone cannot prove interference."
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "W07",
+      "id": "B-W07-2",
+      "name": "analyze_connectivity",
+      "arguments": {
+        "case_id": "W07"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "stats": {
+            "gateway": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "https": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "dns": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "icmp": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            }
+          },
+          "auth": "complete",
+          "conflicts": [],
+          "limitation": "Recorded checks only, not live probes; single target and ICMP failure cannot establish total outage."
+        }
+      }
+    },
+    {
+      "case_id": "W08",
+      "id": "B-W08-1",
+      "name": "analyze_connectivity",
+      "arguments": {
+        "case_id": "W08"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "stats": {
+            "gateway": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "https": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "dns": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "icmp": {
+              "successes": 0,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 0.0,
+              "valid_ratio": 1.0
+            }
+          },
+          "auth": "complete",
+          "conflicts": [],
+          "limitation": "Recorded checks only, not live probes; single target and ICMP failure cannot establish total outage."
+        }
+      }
+    },
+    {
+      "case_id": "W09",
+      "id": "B-W09-1",
+      "name": "analyze_connectivity",
+      "arguments": {
+        "case_id": "W09"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "stats": {
+            "gateway": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "https": {
+              "successes": 0,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 0.0,
+              "valid_ratio": 1.0
+            },
+            "dns": {
+              "successes": 0,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 0.0,
+              "valid_ratio": 1.0
+            },
+            "icmp": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            }
+          },
+          "auth": "required",
+          "conflicts": [],
+          "limitation": "Recorded checks only, not live probes; single target and ICMP failure cannot establish total outage."
+        }
+      }
+    },
+    {
+      "case_id": "W09",
+      "id": "B-W09-2",
+      "name": "check_ip_config",
+      "arguments": {
+        "case_id": "W09"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "format_valid": true,
+          "usable": true,
+          "same_subnet": true,
+          "issues": [],
+          "address_class": "private"
+        }
+      }
+    },
+    {
+      "case_id": "W10",
+      "id": "B-W10-1",
+      "name": "compare_snapshots",
+      "arguments": {
+        "case_id": "W10"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "same_device": false,
+          "seconds_apart": 10800.0,
+          "comparable": false,
+          "changes": {
+            "bssid": {
+              "indoor": "AP-IN",
+              "outdoor": "AP-OUT"
+            },
+            "rssi_dbm": {
+              "indoor": -48,
+              "outdoor": -65
+            }
+          },
+          "limitations": [
+            "Different or unknown device",
+            "Missing timestamps or >300s gap; temporal confounding",
+            "BSSID change alone does not prove roaming failure; signal alone cannot prove interference."
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "W10",
+      "id": "B-W10-2",
+      "name": "analyze_connectivity",
+      "arguments": {
+        "case_id": "W10"
+      },
+      "output": {
+        "ok": true,
+        "result": {
+          "stats": {
+            "gateway": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "https": {
+              "successes": 0,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 0.0,
+              "valid_ratio": 1.0
+            },
+            "dns": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            },
+            "icmp": {
+              "successes": 3,
+              "valid": 3,
+              "total": 3,
+              "success_ratio": 1.0,
+              "valid_ratio": 1.0
+            }
+          },
+          "auth": "complete",
+          "conflicts": [],
+          "limitation": "Recorded checks only, not live probes; single target and ICMP failure cannot establish total outage."
+        }
+      }
+    }
+  ]
+}
