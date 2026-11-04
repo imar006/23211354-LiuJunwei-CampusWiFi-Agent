@@ -4,14 +4,16 @@
 
 ## 环境与启动
 
+本机依赖已就绪时，可直接双击根目录的 **启动MVP.cmd**。该入口不需要运行 PowerShell 脚本，也不修改执行策略。服务启动后访问 http://127.0.0.1:8765，并保持启动窗口运行。新电脑或新克隆的仓库请先按下面步骤安装依赖。
+
 实际验证环境：Python 3.12，依赖版本锁定于 requirements.txt。Windows PowerShell：
 
 ```powershell
 cd wifi_course
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-python -m uvicorn backend.app:app --host 127.0.0.1 --port 8765
+
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m uvicorn backend.app:app --host 127.0.0.1 --port 8765
 ```
 
 打开 http://127.0.0.1:8765。已有课程准备环境 `.runtime` 时可执行 `./start.ps1`（需可用 python）。前端是原生HTML/CSS/JS，无Node构建步骤。仅监听本机，不发布网站。
@@ -51,3 +53,4 @@ python -m unittest discover -s tests -p test_api.py -v
 ```
 
 测试通过HTTP ASGI调用校验10个案例、静态资源、demo完整调查、Trace往返、422/404/400、缺模型的失败记录与并发健康检查；不调用付费模型。程序生成的测试Trace会在测试结束清理。真实浏览器HTTP验证与前端截图以本阶段验证记录为准。
+
