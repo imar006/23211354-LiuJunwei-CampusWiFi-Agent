@@ -12,6 +12,11 @@
 
 ## 2. 环境安装
 
+Windows用户请先把ZIP完整解压，再双击根目录的 `启动MVP.cmd`。首次会创建 `.venv` 并联网安装依赖，完成后自动打开浏览器；请保持服务窗口打开。需要Python 3.10以上，已验证3.12。`start.ps1` 是同一启动流程的PowerShell入口，不是网页文件；CMD仅对本次启动绕过脚本执行限制，不修改系统策略。安装失败会保留窗口显示原因。启动期间请勿再次压缩目录中的`.venv`或缓存。
+
+不安装依赖只想看前端样例，可双击 `frontend/index.html`，这是本地回放，不会调用后端或在线模型。
+
+
 所有命令在解压后的项目根目录运行，即 README.md 所在目录，不需要额外进入 wifi_course 子目录。实际验证 Python 3.12；Windows PowerShell：
 
 ```powershell
