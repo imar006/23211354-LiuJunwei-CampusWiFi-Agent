@@ -1,0 +1,208 @@
+{
+  "output_sha256": "dbd13e7886a4dea9c769943c53e14b25d29e8e17798c97718e1b2de06f9c1dcb",
+  "reviewer": "独立协作审阅代理，未参与该组作答；组名可见，非身份盲评",
+  "review_date": "2026-11-06",
+  "method": "按2026-11-04预冻结逐案双判据，通读原始观测及整个conclusion后人工语义判断，不以关键词或非空字段判分。",
+  "cases": [
+    {
+      "case_id": "W01",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "DNS成功0/3；网关、HTTPS、ICMP各3/3，认证complete。",
+          "reason": "DNS失败与HTTPS/网关成功均有明确观测支持，定位限于DNS层。"
+        },
+        {
+          "pass": true,
+          "quote": "未比较室内外，不能归因位置；HTTPS可能使用缓存或独立目标。",
+          "reason": "全文保留目标、缓存或解析器未知，未锁定服务器；建议核验DNS目标/响应。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W02",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "工具判定地址格式有效但为link_local且usable=false，并报告缺少网关。",
+          "reason": "识别链路本地地址和无网关，未把关联或认证当IP可用。"
+        },
+        {
+          "pass": true,
+          "quote": "same_subnet为null，不能记作网关跨网段；没有租约交换记录。",
+          "reason": "DHCP仅为候选，明确缺少交互/租约；缺失未被当作有效失败。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W03",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "认证required，HTTPS成功0/3；网关、DNS、ICMP各3/3。",
+          "reason": "required及HTTPS失败与DNS/网关成功的分层对比完整。"
+        },
+        {
+          "pass": true,
+          "quote": "人工核对门户会话，并在认证前后对多个HTTPS目标复测。",
+          "reason": "将上网授权与基础可达性分开，保留目标异常并要求门户/认证前后复测。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W04",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "室外RSSI -86 dBm；网关、HTTPS、ICMP各成功1/3。",
+          "reason": "准确识别-86dBm及多类探测间歇成功；语义描述允许等价于1/3，不强制数值逐字复述。"
+        },
+        {
+          "pass": true,
+          "quote": "人工同步采集重传、信道占用、AP负载与多终端网关/HTTPS结果。",
+          "reason": "未由RSSI或AP变化确定干扰/漫游故障；保留AP/终端等其他原因，要求重试或同步采集。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W05",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "IP、prefix、gateway、RSSI、auth均为null，checks为空。",
+          "reason": "关键字段与有效测试缺失被明确列出，拒绝定因。"
+        },
+        {
+          "pass": true,
+          "quote": "DNS服务器列表存在只说明配置字段存在，不证明解析成功；缺失不等于失败。",
+          "reason": "没有用室内数据替代室外，也没有把null当失败；提出具体补采。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W06",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "网关0/3但HTTPS 3/3；认证required但HTTPS成功，工具报告两项冲突。",
+          "reason": "required、网关失败及HTTPS成功均被保留，未忽略反面结果。"
+        },
+        {
+          "pass": true,
+          "quote": "HTTPS成功反驳完全断网；也可能仅为认证白名单测试目标。",
+          "reason": "保留白名单/策略/过期状态解释，未推为全断；提出目标、时间或会话核验。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W07",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "原始记录的BSSID变化本身不是漫游失败证据；少量成功不能排除短时故障。",
+          "reason": "正常标签基于各类测试成功且未将BSSID变化作为故障。"
+        },
+        {
+          "pass": true,
+          "quote": "仅三个检查样本及指定目标，不代表所有应用持续正常。",
+          "reason": "结论限制于记录目标/快照，承认短时故障可漏测。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W08",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "ICMP成功0/3，网关、HTTPS、DNS均3/3，认证complete。",
+          "reason": "ICMP失败与HTTPS/DNS成功同时呈现，拒绝全断判断。"
+        },
+        {
+          "pass": true,
+          "quote": "未核对ICMP与HTTPS目标是否相同，策略限制仅为假设。",
+          "reason": "过滤/目标策略只是可能；不声称所有业务正常，建议目标或实际应用复测。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W09",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "认证required；DNS和HTTPS均0/3，网关和ICMP均3/3。",
+          "reason": "同时识别认证待完成与DNS失败，不只抓一个异常。"
+        },
+        {
+          "pass": true,
+          "quote": "认证策略可能同时解释DNS与HTTPS失败，不能断言独立DNS服务器故障；网关及ICMP成功反驳全面断网。",
+          "reason": "允许门户策略共同解释，未拆为已证实独立故障；建议认证后复测解析。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W10",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "工具返回same_device=false、seconds_apart=10800、comparable=false。",
+          "reason": "不同设备及3小时/10800秒混杂被明确识别，拒绝位置因果。"
+        },
+        {
+          "pass": false,
+          "quote": "本次工具没有返回各层测试统计，不能冒认已经分析HTTPS失败根因。",
+          "reason": "未通过完整判据：虽正确拒绝位置归因并提出同设备近时补测，但全文没有明确承认原始室外HTTPS三次失败。工具未返回统计不等于原始观测没有此信息；遗漏了用户现象的关键证据。不是严重误断言。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "dataset": "data/observations.json",
+  "synthetic": true,
+  "groups": [
+    "A",
+    "B",
+    "C"
+  ],
+  "cases_per_group": 10,
+  "runs_per_case": 1,
+  "platform": "Codex collaborative agents",
+  "exact_model_id": "not exposed",
+  "temperature": "not exposed",
+  "A_B_date": "2026-11-04",
+  "C_date": "2026-11-06",
+  "skill": "skills/wifi-investigation/SKILL.md",
+  "protocol": "tests/protocol.json",
+  "source_outputs": "results/codex",
+  "adjudications": "results/report-evaluation",
+  "limitations": "Historical B tool version differs in warnings/conflicts handling; explicit compatibility normalization retained."
+}

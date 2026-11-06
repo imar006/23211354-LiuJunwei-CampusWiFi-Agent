@@ -1,0 +1,6 @@
+{
+  "B_exact_match": 6,
+  "B_total": 16,
+  "B_compatible_after_declared_warning_field_normalization": 16,
+  "normalization": "remove newly added warnings and move missing-sample notices out of conflicts; does not change raw saved logs or numerical stats"
+}

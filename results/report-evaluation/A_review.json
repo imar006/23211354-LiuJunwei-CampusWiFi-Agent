@@ -1,0 +1,208 @@
+{
+  "output_sha256": "8fe1869d67613097a87003d2e35ad724b4f19abf8d3d6d272f8d6f5d0c3c2a77",
+  "reviewer": "独立协作审阅代理，未参与该组作答；组名可见，非身份盲评",
+  "review_date": "2026-11-06",
+  "method": "按2026-11-04预冻结逐案双判据，通读原始观测及整个conclusion后人工语义判断，不以关键词或非空字段判分。",
+  "cases": [
+    {
+      "case_id": "W01",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "同一手机室内各项成功，室外DNS三次失败，而网关、HTTPS和ICMP均三次成功，异常集中在解析检查。",
+          "reason": "DNS失败与HTTPS/网关成功均有明确观测支持，定位限于DNS层。"
+        },
+        {
+          "pass": true,
+          "quote": "优先怀疑室外解析路径异常。备选解释包括测试域名或解析测试本身有问题、AP侧访问策略差异；不能据此锁定DNS服务器故障，也不能证明位置本身造成故障。",
+          "reason": "全文保留目标、缓存或解析器未知，未锁定服务器；建议核验DNS目标/响应。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W02",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "室外地址为169.254.12.3且网关缺失，区别于室内10.1.2.20及完整网关配置。",
+          "reason": "识别链路本地地址和无网关，未把关联或认证当IP可用。"
+        },
+        {
+          "pass": true,
+          "quote": "没有DHCP交互记录，不能把地址异常等同于已证明DHCP服务器故障。",
+          "reason": "DHCP仅为候选，明确缺少交互/租约；缺失未被当作有效失败。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W03",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "室外网关、DNS及ICMP都成功，仅HTTPS持续失败，且IP与网关配置保留。",
+          "reason": "required及HTTPS失败与DNS/网关成功的分层对比完整。"
+        },
+        {
+          "pass": true,
+          "quote": "通过校园官方门户完成认证，并复测同一HTTPS目标。",
+          "reason": "将上网授权与基础可达性分开，保留目标异常并要求门户/认证前后复测。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W04",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "RSSI由室内-48变为室外-86 dBm，室外网关与ICMP成功失败交替，HTTPS也有成功与失败。",
+          "reason": "准确识别-86dBm及多类探测间歇成功；语义描述允许等价于1/3，不强制数值逐字复述。"
+        },
+        {
+          "pass": true,
+          "quote": "弱信号只是相关证据，没有重传率、噪声或无线丢包记录证明根因。",
+          "reason": "未由RSSI或AP变化确定干扰/漫游故障；保留AP/终端等其他原因，要求重试或同步采集。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W05",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "室外RSSI、IP、前缀、网关及认证为null，checks为空。",
+          "reason": "关键字段与有效测试缺失被明确列出，拒绝定因。"
+        },
+        {
+          "pass": true,
+          "quote": "室外关键观测缺失，无法区分无线、地址、认证、DNS或应用异常，也无法判断室外是否真的不可用。首先考虑采集不完整，而不是把空值解释成故障。",
+          "reason": "没有用室内数据替代室外，也没有把null当失败；提出具体补采。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W06",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "室外auth为required，但HTTPS、DNS和ICMP检查均成功。",
+          "reason": "required、网关失败及HTTPS成功均被保留，未忽略反面结果。"
+        },
+        {
+          "pass": true,
+          "quote": "认证required可能允许白名单目标访问，因此不能直接认定记录造假或认证一定无效。",
+          "reason": "保留白名单/策略/过期状态解释，未推为全断；提出目标、时间或会话核验。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W07",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "同一设备由AP-IN切换至AP-OUT，两处网关、HTTPS、DNS及ICMP全部成功。",
+          "reason": "正常标签基于各类测试成功且未将BSSID变化作为故障。"
+        },
+        {
+          "pass": true,
+          "quote": "现有检查支持本次切换后网络正常。接入点变化和信号降低本身不构成故障；未覆盖的应用问题或短暂漫游中断仍可能存在。",
+          "reason": "结论限制于记录目标/快照，承认短时故障可漏测。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W08",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "室外ICMP三次失败，但认证完成、地址配置完整。",
+          "reason": "ICMP失败与HTTPS/DNS成功同时呈现，拒绝全断判断。"
+        },
+        {
+          "pass": true,
+          "quote": "就浏览器和已有应用连通性检查看网络可用，ICMP检查存在单项异常。可能是ICMP过滤、限速或目标不响应，也可能是独立路径问题，不能把ping失败推成整体断网。",
+          "reason": "过滤/目标策略只是可能；不声称所有业务正常，建议目标或实际应用复测。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W09",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "室外auth由complete变成required，HTTPS全部失败。",
+          "reason": "同时识别认证待完成与DNS失败，不只抓一个异常。"
+        },
+        {
+          "pass": true,
+          "quote": "同时存在认证待完成与DNS检查失败两类异常。可能是认证策略同时限制HTTPS和DNS，也可能认证与解析分别异常；目前无法判定是一个共同原因还是两个故障。",
+          "reason": "允许门户策略共同解释，未拆为已证实独立故障；建议认证后复测解析。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    },
+    {
+      "case_id": "W10",
+      "rubric": [
+        {
+          "pass": true,
+          "quote": "室内为09:00的phone-A，室外为12:00的phone-B，位置比较包含设备和时间混杂。",
+          "reason": "不同设备及3小时/10800秒混杂被明确识别，拒绝位置因果。"
+        },
+        {
+          "pass": true,
+          "quote": "可以确认室外这条记录的HTTPS检查失败，但不足以断言位置导致。设备和时间同时改变；设备应用或TLS配置、目标服务在另一时段异常、AP策略差异均是可行假设。",
+          "reason": "指出室外HTTPS失败但不归因位置，并提出同设备近时对照。"
+        }
+      ],
+      "overclaim": {
+        "present": false,
+        "quote": "",
+        "reason": "通读assessment、证据、反证、限制和建议，未发现协议所列严重误断言；保留了候选或记录范围限制。"
+      }
+    }
+  ]
+}

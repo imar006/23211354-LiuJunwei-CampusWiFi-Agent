@@ -1,0 +1,10 @@
+{
+  "n": 10,
+  "label_accuracy": 1.0,
+  "semantic_evidence": 1.0,
+  "overclaim_rate": 0.0,
+  "task_success": 1.0,
+  "tool_calls": 16,
+  "tool_returns_recomputed_match": 6,
+  "output_sha256": "f1465faad809ffcb89ca415fb28c28d716c15e2e7cbbb0d03580372847915928"
+}

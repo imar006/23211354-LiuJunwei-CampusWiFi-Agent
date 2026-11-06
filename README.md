@@ -1,56 +1,94 @@
-# 楼门外 Wi-Fi 无法上网：证据调查 Agent
+# 校园 Wi-Fi 调查 Agent
 
-这是只读课程实验，使用明确构造的室内/门外网络观测，对地址、DNS、认证、无线问题提出假设，调用检查工具，输出支持证据、反证、限制和下一步建议。
+为校园网维护人员调查“走出楼门仍连接 Wi-Fi，却无法正常上网”的问题。系统对照室内/室外模拟观测，提出地址、DNS、认证、无线质量和上游策略等假设，调用工具并给出支持证据、反证、不确定性及核验建议。只读分析，不扫描或修改真实设备。
 
-## 环境与启动
+## 1. 模型、Agent、Tool 与 Skill
 
-本机依赖已就绪时，可直接双击根目录的 **启动MVP.cmd**。该入口不需要运行 PowerShell 脚本，也不修改执行策略。服务启动后访问 http://127.0.0.1:8765，并保持启动窗口运行。新电脑或新克隆的仓库请先按下面步骤安装依赖。
+实际 A/B/C 实验使用 Codex 协作环境的继承默认模型，原始记录标注 `codex-collaboration`。精确模型 ID、温度、Token 和后端版本不可得，不能保证未来逐字复现。A 直接推理；B 可使用工具；C 另加载专业 Skill。实验不是当前网页每次点击都会发生的模型调用。
 
-实际验证环境：Python 3.12，依赖版本锁定于 requirements.txt。Windows PowerShell：
+程序使用自主实现的轻量 Python Agent（`src/engine.py`），不依赖 CrewAI/PydanticAI。四个真实工具位于 `src/tools.py`：`get_snapshot` 读取快照、`check_ip_config` 检查地址及网关、`analyze_connectivity` 统计有效探测与跨层冲突、`compare_snapshots` 检查设备/时间可比性。专业工作步骤保存于 `skills/wifi-investigation/SKILL.md`，C组实际加载并记录其哈希。
+
+三种模式须区分：规则 demo 实际执行确定性工具；在线 llm 使用服务端配置的 OpenAI 兼容模型；saved 仅回放先前保存的 Codex 记录。缺模型或上游失败会记录 failed，不回退规则并伪称模型结果。直接双击 `frontend/index.html` 是独立前端样例回放。
+
+## 2. 环境安装
+
+所有命令在解压后的项目根目录运行，即 README.md 所在目录，不需要额外进入 wifi_course 子目录。实际验证 Python 3.12；Windows PowerShell：
 
 ```powershell
-cd wifi_course
 python -m venv .venv
-
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe -m uvicorn backend.app:app --host 127.0.0.1 --port 8765
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 ```
 
-打开 http://127.0.0.1:8765。已有课程准备环境 `.runtime` 时可执行 `./start.ps1`（需可用 python）。前端是原生HTML/CSS/JS，无Node构建步骤。仅监听本机，不发布网站。
+主要依赖精确锁定：FastAPI 0.162.0、Uvicorn 0.54.0、HTTPX 0.28.1、Pydantic 2.14.2、Starlette 1.10.0。原生 HTML/CSS/JS 前端无需 Node 或构建。报告生成所需文档工具不是运行本系统的前置依赖。
 
-## 三种使用情形
+## 3. 配置在线模型
 
-1. 网页默认“规则演示”，运行确定性工具调查链，明确不调用LLM。不得将其分数称作AI模型实验结果。
-2. “在线模型”使用服务端OpenAI兼容接口；将 `.env.example` 中变量设置到环境。应用不会自动读取.env文件；PowerShell用 `$env:NETAI_MODEL='模型名称'` 等赋值。需支持tool_calls的模型。配置缺失或请求失败会保存failed记录，不回退规则模式。A/B/C选择分别为直接模型、工具、工具+Skill。
-3. “实验记录”可查看 results/codex 下的预存真实实验JSON。页面明确标记为预存记录，点击不产生新的模型调用。原始模型运行条件须以实验配置和记录说明为准。
-
-## 接口与目录
-
-GET /cases仅返回data/observations.json，绝不返回ground_truth。POST /investigate接受case_id、question、mode、group。GET /traces列出记录，GET /traces/{id}下载JSON，GET /results读取结果汇总。非法记录路径拒绝访问。FastAPI接口文档见 /docs。
-
-src/为Agent与实际检查工具，skills/保存专业调查步骤，data/observations.json为模拟原始观测，data/ground_truth.json为隔离评分依据，frontend/为界面，backend/app.py为入口。results/web_traces保存每次网页执行；results/codex保存独立实验记录。前端不接收API Key，不在localStorage中存储配置。
-
-## 复现与边界
-
-测试案例见data/observations.json；评测命令以tests/目录及对应协议为准。运行规则演示与真实模型评测必须分开。工具执行内容可以在网页逐条展开，导出Trace保留原始JSON。合成快照只能检验给定场景的推断，不证明真实校园根因；ICMP失败不等于互联网不可用，无线信号变化与认证状态须结合协议证据。不会扫描或修改任何网络设备。
-
-AI参与了代码、案例和文稿生成；学生应理解工具判断条件，检查原始Trace和评测方法，并据实补充个人贡献。
-
-## 第一阶段 FastAPI MVP（新工作目录）
-
-唯一继续开发目录为 `C:/Users/imar/Desktop/AI_net_work/wifi_course`。可双击 `frontend/index.html` 独立预览；连接后端请运行上述uvicorn命令并打开HTTP地址，页面会自动采用API。NS主页式前端无需构建或重新设计。
-
-健康检查：`GET /health`，只返回服务状态和模型是否配置，不回显密钥。`POST /investigate` 的mode枚举为demo/llm，group为A/B/C，规则演示仅允许C；case_id必须是W加两位数字，question若提供须为1至4000字符。未知字段会被拒绝。引擎在独立标准线程执行，不阻塞异步事件循环。
-
-HTTP状态约定：200表示请求已执行并保存Trace；模型未配置、上游失败等业务执行失败仍返回200，但 `trace.status=failed`，没有规则回退。422表示参数或组合不合法；404表示案例、记录或静态资源不存在；400表示Trace编号不安全；500表示本地记录损坏。每次调查Trace保存trace_id与UTC的created_at，返回的trace与下载记录一致。记录只允许读取results/codex或results/web_traces下白名单名称，拒绝路径穿越。
-
-模型配置只在启动服务的同一个终端设置，例如 `$env:NETAI_MODEL='已安装的实际模型名'`。 `.env.example` 是变量说明模板，复制为.env不会自动加载。服务会过滤已配置凭据及敏感字段；不要把密钥写进源码、问题或提交材料。
-
-API自动测试：
+`.env.example` 仅提供变量模板，应用不会自动读取 `.env`。在启动服务的同一个 PowerShell 中配置：
 
 ```powershell
-python -m unittest discover -s tests -p test_api.py -v
+$env:NETAI_BASE_URL='http://localhost:11434/v1'
+$env:NETAI_MODEL='填写实际已部署且支持工具调用的模型名称'
+# 若服务需要认证，在本机设置 NETAI_API_KEY；不要提交密钥。
 ```
 
-测试通过HTTP ASGI调用校验10个案例、静态资源、demo完整调查、Trace往返、422/404/400、缺模型的失败记录与并发健康检查；不调用付费模型。程序生成的测试Trace会在测试结束清理。真实浏览器HTTP验证与前端截图以本阶段验证记录为准。
+`NETAI_BASE_URL` 是兼容接口的 /v1 根地址，`NETAI_MODEL` 必须与实际服务一致，`NETAI_API_KEY` 仅在服务端读取。示例不代表本机已安装某个模型，也不能用另一模型的新结果替换本次历史实验。服务过滤已配置凭据，前端不接收密钥，且不使用 localStorage 保存模型配置。
 
+## 4. 启动与完整调查
+
+```powershell
+python -m uvicorn backend.app:app --host 127.0.0.1 --port 8765
+# 或 .\start.ps1
+```
+
+打开 [本地工作台](http://127.0.0.1:8765)。选择 W01 和“规则演示”，点击“开始调查”，检查实际工具 JSON、来源引用、结论与反证，再导出 Trace。选择“查看真实实验记录”及 A/B/C 可浏览历史实验；B/C会合并对应工具日志。网页明确标注历史查看不产生本次新模型调用。
+
+接口文档位于 `/docs`；`GET /health` 检查服务状态；`GET /cases` 只返回观测不返回答案；`POST /investigate` 接受 case_id/question/mode/group；`GET /traces` 列表及 `/traces/{id}` 下载；`GET /results` 查看汇总。mode=demo/llm，group=A/B/C；demo仅C。参数不合法422、未知案例/记录404、不安全Trace编号400。200仅表示调查请求已处理：还须检查 `trace.status` 是否 completed。每次API调查保存 trace_id 与UTC created_at。阻塞模型调用运行在独立执行器中。
+
+## 5. 测试与10案规则演示
+
+```powershell
+python -m unittest discover -s tests -p "test_*.py" -v
+```
+
+现有21项自动测试涵盖地址合法性、null样本分母、冲突与ICMP/HTTPS区分、可比性、来源引用、错误参数、模型失败与工具预算，以及HTTP接口、Trace往返、秘密脱敏和健康接口并发响应。
+
+下面在不调用模型的前提下依次运行10案，并打印实际状态与暂定标签：
+
+```powershell
+python -c "import json; from src.engine import run; d=json.load(open('data/observations.json',encoding='utf-8')); ts=[run(c['id'],mode='demo') for c in d['cases']]; print(*[(t['case_id'],t['status'],t.get('conclusion',{}).get('label')) for t in ts],sep='\n')"
+```
+
+`data/observations.json` 为明确模拟数据；`data/ground_truth.json` 是评分依据，运行Agent不读取它。规则演示只验证软件链路，不能拿其分数当作A/B/C模型成绩。
+
+## 6. 复算历史 A/B/C 评测
+
+```powershell
+python tests/reproduce_evaluation.py
+```
+
+此命令仅使用标准库，逐组运行 `tests/evaluate.py`，读取原始输出 `results/codex/{A,B,C}.json`、逐案语义审阅 `results/report-evaluation/{A,B,C}_review.json`，并重算 B/C 的工具日志。输出写入 `results/reproduced/A`、`B`、`C` 及总汇总；自动检查全部分数和原始输出 SHA256 与报告基线相同，不改写原始数据、不调用任何模型。发现差异直接报错，不偷偷重建审阅文件。
+
+单组命令示例：
+
+```powershell
+python tests/evaluate.py results/codex/C.json --review results/report-evaluation/C_review.json --calls results/codex/C_calls.json --save results/reproduced/C
+```
+
+评测协议见 `tests/protocol.json`。标签准确率、两条逐案语义判据通过率、严重过度断言率和任务成功率均有预定义规则；审阅引用须出现在原输出，审阅还与输出哈希绑定。A/B/C标签均100%；语义证据分别100%、100%、95%；任务成功分别100%、100%、90%。C的W10虽标签正确，却遗漏原始室外HTTPS失败症状，保留为失败案例。结果不支持宣称Skill在这10案上提高成功率。
+
+B工具历史16条仅6条与当前版本精确匹配：当前 `analyze_connectivity` 新增 warnings，并把缺失样本提示从 conflicts 移出；统计数值及真正跨层冲突不变。仅按已声明规则规范化后16/16兼容，C则10/10精确匹配。脚本另行检查此兼容结论；不覆盖旧日志。B/C工具版本不完全一致，是对照实验混杂限制，6/16不能解释为10次调用错误。
+
+## 7. 提交文件与组织
+
+根目录提供 `report.pdf`、本README、`requirements.txt`、`.env.example`。`src/` 是Agent与Tool，`backend/` 是FastAPI入口，`frontend/` 是原生界面与本地样例；`skills/` 为专业Skill，`data/` 为模拟观测和隔离答案；`tests/` 为测试、协议及评分程序；`results/codex/` 为原始模型输出与Tool日志，`results/report-evaluation/` 为审阅及报告评分基线；`docs/` 为架构、工作流程、截图和来源记录。ZIP中应包含报告、完整源码与实验记录。不要提交 .runtime、.venv、API Key 或运行期间临时日志。
+
+## 8. 已知限制与 AI 辅助说明
+
+本项目不接管真实校园网，不承诺定位楼门口现场根因。10案人为构造、每组单次，易出现天花板效应，不能推断显著性或真实网络泛化；正常仅限给定目标与时刻。Codex精确模型版本不可锁定、人工审阅非完全盲评、B/C工具存在版本差异。复算保存输出能重现评分，不能等同于重新运行同一服务端模型。Wi-Fi关联不等于授权完成，BSSID变化不证明漫游失败，单次ICMP失败不证明完全断网，低RSSI不能证明干扰，缺失不能当失败样本。
+
+AI协助生成了设计、代码、模拟案例和文稿；实际运行、错误修复及证据审阅另有记录。提交者仍需理解每个工具、核验原始输出与评分，并据实说明个人贡献。后续真实模型测试必须另存新批次，保留失败与版本信息，不能回改本次实验。
+
+## 提交材料
+
+仓库：[23211354-LiuJunwei-CampusWiFi-Agent](https://github.com/imar006/23211354-LiuJunwei-CampusWiFi-Agent)。正式报告位于根目录 `report.pdf`；设计文档、运行截图及可编辑报告位于 `docs/`；原始实验、评分依据与汇总位于 `results/`。

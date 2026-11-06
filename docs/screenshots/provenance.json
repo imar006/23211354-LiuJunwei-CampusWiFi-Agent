@@ -1,0 +1,24 @@
+{
+  "captured_at": "2026-11-06T12:50:42.432Z",
+  "url": "http://127.0.0.1:8765",
+  "browser": "Microsoft Edge via Playwright",
+  "viewport": {
+    "width": 1440,
+    "height": 1050
+  },
+  "zoom": 0.9,
+  "case_id": "W01",
+  "group": "C",
+  "mode": "saved",
+  "notice": "真实本地HTTP页面查看先前Codex实验记录，非本次新API模型调用。图1输入、假设、判断、证据；图2支持/反证/限制与展开的真实工具返回JSON。",
+  "source": [
+    {
+      "path": "results/codex/C.json",
+      "sha256": "dbd13e7886a4dea9c769943c53e14b25d29e8e17798c97718e1b2de06f9c1dcb"
+    },
+    {
+      "path": "results/codex/C_calls.json",
+      "sha256": "44def701b9f7195638c512ae9c5ce0ec61035f4396c4d02fd897d18b7afa9d26"
+    }
+  ]
+}
