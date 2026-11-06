@@ -92,3 +92,5 @@ AI协助生成了设计、代码、模拟案例和文稿；实际运行、错误
 ## 提交材料
 
 仓库：[23211354-LiuJunwei-CampusWiFi-Agent](https://github.com/imar006/23211354-LiuJunwei-CampusWiFi-Agent)。正式报告位于根目录 `report.pdf`；设计文档、运行截图及可编辑报告位于 `docs/`；原始实验、评分依据与汇总位于 `results/`。
+
+评分证据索引见[需求与验收矩阵](docs/requirements-matrix.md)；AI辅助范围、代表性修改与两人各50%的责任安排见[AI辅助与小组分工](docs/AI辅助与小组分工.md)。
