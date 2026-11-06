@@ -9,6 +9,7 @@ import threading
 import time
 import urllib.request
 import webbrowser
+from datetime import datetime
 
 ROOT = Path(__file__).resolve().parent
 
@@ -35,7 +36,17 @@ def main():
         return 0
     env_python = ROOT / ".venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
     if Path(sys.executable).resolve() != env_python.resolve():
-        if not env_python.exists():
+        usable = False
+        if env_python.exists():
+            try:
+                usable = subprocess.run([str(env_python), "-c", "import sys; assert sys.version_info >= (3, 10)"], capture_output=True).returncode == 0
+            except OSError:
+                pass
+        if not usable:
+            if (ROOT / ".venv").exists():
+                backup = ROOT / (".venv.invalid-" + datetime.now().strftime("%Y%m%d%H%M%S%f"))
+                (ROOT / ".venv").rename(backup)
+                print("Copied or broken virtual environment moved to " + backup.name, flush=True)
             print("First launch: creating an isolated Python environment...", flush=True)
             subprocess.run([sys.executable, "-m", "venv", str(ROOT / ".venv")], check=True)
         return subprocess.call([str(env_python), str(Path(__file__).resolve()), *sys.argv[1:]])

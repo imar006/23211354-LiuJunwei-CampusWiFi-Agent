@@ -12,7 +12,9 @@
 
 ## 2. 环境安装
 
-Windows用户请先把ZIP完整解压，再双击根目录的 `启动MVP.cmd`。首次会创建 `.venv` 并联网安装依赖，完成后自动打开浏览器；请保持服务窗口打开。需要Python 3.10以上，已验证3.12。`start.ps1` 是同一启动流程的PowerShell入口，不是网页文件；CMD仅对本次启动绕过脚本执行限制，不修改系统策略。安装失败会保留窗口显示原因。启动期间请勿再次压缩目录中的`.venv`或缓存。
+Windows用户请先完整解压ZIP，再双击根目录 `启动MVP.cmd` 或 `WiFiMVP.exe`。随包Windows x64免安装程序自带Python和依赖，不需要安装Python、Codex或联网下载依赖。不要只转发EXE：数据、前端、Skill和历史记录仍需保持目录结构。启动后会打开浏览器；保持控制台窗口打开。规则调查及历史回放可离线使用，在线LLM模式仍需配置自己的模型服务。端口被其他程序占用时会尝试相邻端口，具体地址见窗口。启动失败会保留提示并写startup.log。
+
+源码启动：`start.ps1`优先使用免安装EXE；没有EXE时寻找可运行的Python3.10+，再由launch.py创建环境并联网安装依赖。复制自其他电脑的`.venv`不可移植：启动器会验证解释器，失效环境由launch.py保留为`.venv.invalid-*`后重建。不要将`.venv`、失效环境备份和缓存再次压缩。
 
 不安装依赖只想看前端样例，可双击 `frontend/index.html`，这是本地回放，不会调用后端或在线模型。
 
@@ -99,3 +101,13 @@ AI协助生成了设计、代码、模拟案例和文稿；实际运行、错误
 仓库：[23211354-LiuJunwei-CampusWiFi-Agent](https://github.com/imar006/23211354-LiuJunwei-CampusWiFi-Agent)。正式报告位于根目录 `report.pdf`；设计文档、运行截图及可编辑报告位于 `docs/`；原始实验、评分依据与汇总位于 `results/`。
 
 评分证据索引见[需求与验收矩阵](docs/requirements-matrix.md)；AI辅助范围、代表性修改与两人各50%的责任安排见[AI辅助与小组分工](docs/AI辅助与小组分工.md)。
+
+## Windows免安装程序构建
+
+在Windows x64、Python3.12环境安装运行依赖和 `pyinstaller==6.22.3` 后，在根目录运行：
+
+```powershell
+python -m PyInstaller --noconfirm --clean --onefile --name WiFiMVP --collect-all uvicorn --hidden-import backend.app --hidden-import src.engine --hidden-import src.tools portable_entry.py
+```
+
+将 `dist/WiFiMVP.exe` 放到项目根目录。EXE包含程序和依赖；前端、模拟数据、Skill、原始实验记录由项目根目录读取。完整源码保留可供检查和重新构建。

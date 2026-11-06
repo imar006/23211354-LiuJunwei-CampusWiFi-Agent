@@ -19,3 +19,8 @@ Thumbs.db
 ~$*
 
 results/reproduced/
+
+.venv.invalid-*/
+build/
+dist/
+*.spec

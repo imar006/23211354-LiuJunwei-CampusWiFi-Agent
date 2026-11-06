@@ -1,0 +1,72 @@
+{
+  "platform": "Windows x64",
+  "python_on_PATH": false,
+  "codex_profile_available": false,
+  "working_directory": "C:/Windows/Temp",
+  "copied_invalid_venv_present": true,
+  "portable_exe_sha256": "16f19abd9828856d4d401249592ad40b8bbb411962b97819864d712bc09da98f",
+  "health": {
+    "status": "ok",
+    "version": "1.1.0",
+    "service": "wifi-investigation",
+    "model_configured": false
+  },
+  "complete_investigations": [
+    {
+      "case": "W01",
+      "status": "completed",
+      "calls": 4
+    },
+    {
+      "case": "W02",
+      "status": "completed",
+      "calls": 4
+    },
+    {
+      "case": "W03",
+      "status": "completed",
+      "calls": 4
+    },
+    {
+      "case": "W04",
+      "status": "completed",
+      "calls": 4
+    },
+    {
+      "case": "W05",
+      "status": "completed",
+      "calls": 4
+    },
+    {
+      "case": "W06",
+      "status": "completed",
+      "calls": 4
+    },
+    {
+      "case": "W07",
+      "status": "completed",
+      "calls": 4
+    },
+    {
+      "case": "W08",
+      "status": "completed",
+      "calls": 4
+    },
+    {
+      "case": "W09",
+      "status": "completed",
+      "calls": 4
+    },
+    {
+      "case": "W10",
+      "status": "completed",
+      "calls": 4
+    }
+  ],
+  "saved_groups_loaded": [
+    "A",
+    "B",
+    "C"
+  ],
+  "limitation": "Relocation and environment-isolation test on this Windows computer; not claimed as teammate-device validation."
+}
